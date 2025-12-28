@@ -16,8 +16,12 @@ public class Assets {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int asset_id;
-    private String asset_name;
-    private Date purchase_date;
+    @Column(name="asset_name")
+    private String assetName;
+    @Column(name="purchase_date")
+    private Date purchaseDate;
+    @Column(name="status")
     private String status;
-    private int user_id;
+    @Column(name="user_id")
+    private int userId;
 }

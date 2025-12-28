@@ -16,8 +16,12 @@ public class Maintenance {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int maintenance_id;
-    private int asset_id;
-    private Date last_maintenance_date;
-    private Date next_maintenance_date;
-    private String remakrs;
+    @Column(name="asset_id")
+    private int assetId;
+    @Column(name="last_maintenance_date")
+    private Date lastMaintenanceDate;
+    @Column(name="next_maintenance_date")
+    private Date nextMaintenanceDte;
+    @Column(name="remaks")
+    private String remaks;
 }

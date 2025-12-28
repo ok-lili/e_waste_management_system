@@ -17,8 +17,10 @@ public class Users {
     private String name;
     private String email;
     private String department;
-    private String  phone_number;
-    private int room_number;
+    @Column(name="phone_number")
+    private String  phoneNumber;
+    @Column(name="room_number")
+    private int roomNumber;
     private String role;
     private String  password;
 }
