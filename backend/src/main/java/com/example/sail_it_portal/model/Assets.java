@@ -15,13 +15,15 @@ import java.util.Date;
 public class Assets {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int asset_id;
+    @Column(name = "asset_id")
+    private int assetId;
     @Column(name="asset_name")
     private String assetName;
     @Column(name="purchase_date")
     private Date purchaseDate;
     @Column(name="status")
     private String status;
-    @Column(name="user_id")
-    private int userId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
+    private Users user;
 }

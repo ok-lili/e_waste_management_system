@@ -5,6 +5,8 @@ import com.example.sail_it_portal.model.Users;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserService {
     @Autowired
@@ -30,4 +32,8 @@ public class UserService {
         }
         return null; // login failed
     }
+    public List<Users> getAllUsers() {
+        return usersRepo.findAll();
+    }
+
 }

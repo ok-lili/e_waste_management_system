@@ -8,7 +8,7 @@ import java.util.List;
 
 @Repository
 public interface AssetsRepo extends JpaRepository<Assets,Integer> {
-    public Assets findByAssetName(String assetName);
+     Assets findByAssetName(String assetName);
     List<Assets> findByStatus(String status);
 
 }

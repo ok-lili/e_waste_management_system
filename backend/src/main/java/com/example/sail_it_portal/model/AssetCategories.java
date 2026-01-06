@@ -15,7 +15,8 @@ import java.util.Date;
 public class AssetCategories {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int category_id;
+    @Column(name = "category_id")
+    private int categoryId;
     @Column(name="category_name")
     private String categoryName;
 }

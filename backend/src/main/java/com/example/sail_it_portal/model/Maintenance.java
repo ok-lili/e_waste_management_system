@@ -15,7 +15,8 @@ import java.util.Date;
 public class Maintenance {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int maintenance_id;
+    @Column(name="maintenance_id")
+    private int maintenanceId;
     @Column(name="asset_id")
     private int assetId;
     @Column(name="last_maintenance_date")
