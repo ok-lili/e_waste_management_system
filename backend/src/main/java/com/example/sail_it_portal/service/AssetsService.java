@@ -2,6 +2,7 @@ package com.example.sail_it_portal.service;
 
 import com.example.sail_it_portal.dto.AssetsDTO;
 import com.example.sail_it_portal.model.Assets;
+import com.example.sail_it_portal.model.AssetStatus;
 import com.example.sail_it_portal.model.Users;
 import com.example.sail_it_portal.repository.AssetsRepo;
 import com.example.sail_it_portal.repository.UsersRepo;
@@ -19,37 +20,21 @@ public class AssetsService {
     @Autowired
     private UsersRepo usersRepo;
 
-    // Add new asset
+    // Add Asset
     public Assets addAsset(AssetsDTO dto) {
         Assets asset = mapToEntity(dto);
         return assetsRepo.save(asset);
     }
 
-    // Map DTO to Entity
-    private Assets mapToEntity(AssetsDTO dto) {
-        Assets asset = new Assets();
-        asset.setAssetName(dto.getName());
-        asset.setPurchaseDate(dto.getPurchaseDate());
-        asset.setStatus(dto.getStatus());
-
-        // ✅ Map userId to Users object
-        Users user = usersRepo.findById(dto.getUserId())
-                .orElseThrow(() -> new RuntimeException("User not found"));
-        asset.setUser(user);
-
-        return asset;
-    }
-
-    // Update existing asset
+    // Update Asset
     public Assets updateAsset(Integer assetId, AssetsDTO dto) {
         Assets asset = assetsRepo.findById(assetId)
                 .orElseThrow(() -> new RuntimeException("Asset not found"));
 
         asset.setAssetName(dto.getName());
         asset.setPurchaseDate(dto.getPurchaseDate());
-        asset.setStatus(dto.getStatus());
+        asset.setStatus(dto.getStatus()); // ✅ enum-safe
 
-        // ✅ Update user
         Users user = usersRepo.findById(dto.getUserId())
                 .orElseThrow(() -> new RuntimeException("User not found"));
         asset.setUser(user);
@@ -66,5 +51,30 @@ public class AssetsService {
     public Assets getAssetById(Integer assetId) {
         return assetsRepo.findById(assetId)
                 .orElseThrow(() -> new RuntimeException("Asset not found"));
+    }
+
+    // Delete asset
+    public void deleteAsset(Integer assetId) {
+        Assets asset = assetsRepo.findById(assetId)
+                .orElseThrow(() -> new RuntimeException("Asset not found"));
+
+        assetsRepo.delete(asset);
+    }
+
+    // Map DTO → Entity
+    private Assets mapToEntity(AssetsDTO dto) {
+        Assets asset = new Assets();
+        asset.setAssetName(dto.getName());
+        asset.setPurchaseDate(dto.getPurchaseDate());
+
+        // ✅ MUST be AssetStatus in DTO, not String
+        asset.setStatus(dto.getStatus());
+
+        Users user = usersRepo.findById(dto.getUserId())
+                .orElseThrow(() -> new RuntimeException("User not found"));
+        asset.setUser(user);
+
+        // TODO: category mapping if needed
+        return asset;
     }
 }

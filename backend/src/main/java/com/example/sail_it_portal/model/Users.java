@@ -15,17 +15,13 @@ public class Users {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
     private int userId;
-
     private String name;
     private String email;
     private String department;
-
     @Column(name="phone_number")
     private String  phoneNumber;
-
     @Column(name="room_number")
     private int roomNumber;
-
     private String role;
     private String  password;
 }

@@ -46,15 +46,7 @@ import java.util.List;
 //        return ResponseEntity.ok(asset);
 //    }
 
-//@RestController
-//@RequestMapping("/api/assets")
-//public class AssetsController {
-//
-//    @PostMapping
-//    public String testPost(@RequestBody String rawBody) {
-//        return "Backend is working! Received: " + rawBody;
-//    }
-//}
+
 
 
 @RestController
@@ -65,20 +57,33 @@ public class AssetsController {
     @Autowired
     private AssetsService assetsService;
 
-    // POST: http://localhost:8080/api/assets
     @PostMapping
     @Transactional
     public ResponseEntity<Assets> addAsset(@RequestBody AssetsDTO dto) {
-        // Yeh line aapke Service ke addAsset method ko trigger karegi
         Assets savedAsset = assetsService.addAsset(dto);
         return new ResponseEntity<>(savedAsset, HttpStatus.CREATED);
     }
 
-    // GET: http://localhost:8080/api/assets
     @GetMapping
     public ResponseEntity<List<Assets>> getAllAssets() {
         return ResponseEntity.ok(assetsService.getAllAssets());
+
     }
+    @PutMapping ("{assetId}")
+    public ResponseEntity<Assets> updateAsset(@PathVariable Integer assetId,@RequestBody  AssetsDTO dto) {
+        Assets updatedAsset = assetsService.updateAsset(assetId,dto);
+        return ResponseEntity.ok(updatedAsset);
+    }
+    @GetMapping ("{assetId}")
+    public ResponseEntity<Assets> getAssetById(@PathVariable Integer assetId){
+        return ResponseEntity.ok(assetsService.getAssetById(assetId));
+    }
+    @DeleteMapping("{assetId}")
+    public ResponseEntity<String> deleteAsset(@PathVariable Integer assetId) {
+        assetsService.deleteAsset(assetId);
+        return ResponseEntity.ok("Asset deleted successfully");
+    }
+
 }
 
 

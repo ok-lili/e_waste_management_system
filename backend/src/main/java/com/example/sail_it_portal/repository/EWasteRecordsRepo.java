@@ -8,12 +8,5 @@ import java.util.List;
 
 @Repository
 public interface EWasteRecordsRepo extends JpaRepository<EWasteRecords, Integer> {
-
-    List<EWasteRecords> findByDisposalMethod(String disposalMethod);
-
-    List<EWasteRecords> findByAssetId(Integer assetId); // Match with assetId
-
-    List<EWasteRecords> findByDisposalDate(Date disposalDate); // Match with disposalDate
-
-    List<EWasteRecords> findByRecyclerName(String recyclerName); // Match with recyclerName
+    List<EWasteRecords> findByAsset_AssetId(int assetId);
 }

@@ -11,15 +11,12 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/users")
-@CrossOrigin(origins = "*") // allow calls from React frontend
+@CrossOrigin(origins = "*")
 public class UserController {
 
     @Autowired
     private UserService userService;
 
-    // -----------------------
-    // Register / Create User
-    // -----------------------
     @PostMapping("/register")
     public ResponseEntity<?> registerUser(@RequestBody Users user) {
         Users createdUser = userService.createUser(user);
@@ -30,9 +27,6 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.CREATED).body(createdUser);
     }
 
-    // -----------------------
-    // Login User
-    // -----------------------
     @PostMapping("/login")
     public ResponseEntity<?> loginUser(@RequestBody Users user) {
         Users loggedInUser = userService.loginUser(user.getEmail(), user.getPassword());
@@ -43,9 +37,6 @@ public class UserController {
         return ResponseEntity.ok(loggedInUser);
     }
 
-    // -----------------------
-    // Get all users
-    // -----------------------
     @GetMapping
     public ResponseEntity<List<Users>> getAllUsers() {
         List<Users> users = userService.getAllUsers();
