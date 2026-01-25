@@ -1,14 +1,32 @@
+// import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+// import AssetsPage from "../src/pages/AssetsPage";
+// import LoginPage from "../src/pages/LoginPage"
+// function App() {
+//   return (
+//     <Router>
+//       <Routes>
+//         <Route path="/" element={<LoginPage />} />
+//         <Route path="/login" element={<LoginPage />} />
+//         <Route path="/assets" element={<AssetsPage />} />
+//       </Routes>
+//     </Router>
+//   );
+// }
+
+// export default App;
+
+
+// src/App.jsx
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Login from "./components/Login/Login";
-import Signup from "./components/Signup/Signup";
-import "./index.css";
+import AssetsPage from "./pages/AssetsPage";
 
 function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
+        {/* Directly render AssetsPage with full CRUD + categories */}
+        <Route path="/" element={<AssetsPage />} />
+        <Route path="/assets" element={<AssetsPage />} />
       </Routes>
     </Router>
   );
